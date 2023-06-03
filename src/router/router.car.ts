@@ -1,9 +1,8 @@
 import express from "express";
+import createCar from "../controllers/car/create";
 
 const routerCar = express.Router();
 
-routerCar.get('/', (_req, res) => {
-    res.send('Hello World!')
-  });
+routerCar.post('/car', createCar);
 
   export default routerCar;
