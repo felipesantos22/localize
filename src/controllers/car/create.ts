@@ -11,8 +11,6 @@ async function createCar(request: Request, response: Response) {
     } catch (error) {
         return response.status(StatusCodes.UNAUTHORIZED).json({ message: "Registro não criado!" });
     }
-
-
 }
 
 export default createCar;
