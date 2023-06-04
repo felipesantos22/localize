@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
-import readUserService from "../../controllers/user/read";
+import readUser from "../../controllers/user/read";
 import { StatusCodes } from 'http-status-codes';
 
 
-async function readUserController(req: Request, res: Response) {
-    const read = await readUserService();
+async function readUserControllerWithRelatio(req: Request, res: Response) {
+    const read = await readUser.readUserServiceWithRelation();
     return res.status(StatusCodes.OK).json(read);
 }
 
-export default readUserController;
+async function readUserController(req: Request, res: Response) {
+    const read = await readUser.readUserService();
+    return res.status(StatusCodes.OK).json(read);
+}
+export default { readUserControllerWithRelatio, readUserController };

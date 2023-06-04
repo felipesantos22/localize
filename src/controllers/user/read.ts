@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function readUserService() {
+async function readUserServiceWithRelation() {
     const read = await prisma.user.findMany({
         include: {
             cars: true
@@ -11,5 +11,10 @@ async function readUserService() {
     return read;
 };
 
-export default readUserService;
+async function readUserService() {
+    const read = await prisma.user.findMany();
+    return read;
+}
+
+export default { readUserServiceWithRelation, readUserService };
 
