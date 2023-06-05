@@ -12,7 +12,8 @@ async function createCar({ modelo, placa, ano, userId }: ICar) {
             ano,
             userId,
         }
-    })
+    });
+    return createCar;
 }
 
 export default { createCar };

@@ -1,15 +1,19 @@
-import { Request, Response } from "express";
-import readUser from "../../controllers/user/read";
-import { StatusCodes } from 'http-status-codes';
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 
-async function readUserControllerWithRelatio(req: Request, res: Response) {
-    const read = await readUser.readUserServiceWithRelation();
-    return res.status(StatusCodes.OK).json(read);
+async function readUserServiceWithRelation() {
+    const read = await prisma.user.findMany({
+        include: {
+            cars: true
+        }
+    });
+    return read;
+};
+
+async function readUserService() {
+    const read = await prisma.user.findMany();
+    return read;
 }
 
-async function readUserController(req: Request, res: Response) {
-    const read = await readUser.readUserService();
-    return res.status(StatusCodes.OK).json(read);
-}
-export default { readUserControllerWithRelatio, readUserController };
+export default { readUserServiceWithRelation, readUserService };
